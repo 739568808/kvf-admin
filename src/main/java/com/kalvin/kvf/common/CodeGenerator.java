@@ -22,7 +22,7 @@ public class CodeGenerator {
     private static boolean serviceNameStartWithI = true;  //user -> UserService, 设置成true: user -> IUserService
     private static String author = "Kalvin";    // 作者
     private static String outputDir = "D://genCode";   // 代码生成的路径目录
-    private static String dbUrl = "jdbc:mysql://47.57.146.205:3308/wenzhang?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&tinyInt1isBit=false&serverTimezone=GMT%2B8";
+    private static String dbUrl = "jdbc:mysql://47.57.146.20:3308/wenzhang?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&tinyInt1isBit=false&serverTimezone=GMT%2B8";
     private static String dbUsername = "root";
     private static String dbPassword = "9ol./;p0";
 

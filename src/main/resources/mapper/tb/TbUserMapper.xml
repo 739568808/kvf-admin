@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kalvin.kvf.modules.tb.mapper.TbUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kalvin.kvf.modules.tb.entity.TbUser">
+        <id column="id" property="id" />
+        <result column="phone" property="phone" />
+        <result column="password" property="password" />
+        <result column="real_name" property="realName" />
+        <result column="zfb" property="zfb" />
+        <result column="uv" property="uv" />
+        <result column="pid" property="pid" />
+        <result column="flag" property="flag" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+       id, phone, password, real_name, zfb, uv, pid, flag, create_date, update_date
+    </sql>
+
+    <select id="selectUserList" resultType="com.kalvin.kvf.modules.tb.entity.TbUser">
+        select <include refid="Base_Column_List" /> from tb_user
+        <trim prefix="where" prefixOverrides="and">
+            <if test="user.phone != null">
+                and phone = #{user.phone}
+            </if>
+            <if test="user.password != null and user.password != ''">
+                and password like concat(#{user.password}, "%")
+            </if>
+            <if test="user.realName != null and user.realName != ''">
+                and real_name like concat(#{user.realName}, "%")
+            </if>
+            <if test="user.zfb != null and user.zfb != ''">
+                and zfb like concat(#{user.zfb}, "%")
+            </if>
+            <if test="user.uv != null">
+                and uv = #{user.uv}
+            </if>
+            <if test="user.pid != null">
+                and pid = #{user.pid}
+            </if>
+            <if test="user.flag != null">
+                and flag = #{user.flag}
+            </if>
+            <if test="user.createDate != null">
+                and create_date = #{user.createDate}
+            </if>
+            <if test="user.updateDate != null">
+                and update_date = #{user.updateDate}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

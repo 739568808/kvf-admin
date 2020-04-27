@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kalvin.kvf.modules.tb.mapper.MessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kalvin.kvf.modules.tb.entity.Message">
+        <id column="id" property="id" />
+        <result column="head_img" property="headImg" />
+        <result column="nick_name" property="nickName" />
+        <result column="content" property="content" />
+        <result column="author_recovery" property="authorRecovery" />
+        <result column="up_time" property="upTime" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+       id, head_img, nick_name, content, author_recovery, up_time, create_date, update_date
+    </sql>
+
+    <select id="selectMessageList" resultType="com.kalvin.kvf.modules.tb.entity.Message">
+        select <include refid="Base_Column_List" /> from tb_message
+        <trim prefix="where" prefixOverrides="and">
+            <if test="message.headImg != null and message.headImg != ''">
+                and head_img like concat(#{message.headImg}, "%")
+            </if>
+            <if test="message.nickName != null and message.nickName != ''">
+                and nick_name like concat(#{message.nickName}, "%")
+            </if>
+            <if test="message.content != null and message.content != ''">
+                and content like concat(#{message.content}, "%")
+            </if>
+            <if test="message.authorRecovery != null and message.authorRecovery != ''">
+                and author_recovery like concat(#{message.authorRecovery}, "%")
+            </if>
+            <if test="message.upTime != null and message.upTime != ''">
+                and up_time like concat(#{message.upTime}, "%")
+            </if>
+            <if test="message.createDate != null">
+                and create_date = #{message.createDate}
+            </if>
+            <if test="message.updateDate != null">
+                and update_date = #{message.updateDate}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

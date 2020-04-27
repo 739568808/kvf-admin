@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kalvin.kvf.modules.tb.mapper.ArticleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.kalvin.kvf.modules.tb.entity.Article">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="sub_title" property="subTitle" />
+        <result column="content" property="content" />
+        <result column="pv" property="pv" />
+        <result column="uv" property="uv" />
+        <result column="wx" property="wx" />
+        <result column="flag" property="flag" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+       id, title, sub_title, content, pv, uv, wx, flag, create_date, update_date
+    </sql>
+
+    <select id="selectArticleList" resultType="com.kalvin.kvf.modules.tb.entity.Article">
+        select <include refid="Base_Column_List" /> from tb_article
+        <trim prefix="where" prefixOverrides="and">
+            <if test="article.title != null and article.title != ''">
+                and title like concat(#{article.title}, "%")
+            </if>
+            <if test="article.subTitle != null and article.subTitle != ''">
+                and sub_title like concat(#{article.subTitle}, "%")
+            </if>
+            <if test="article.content != null">
+                and content = #{article.content}
+            </if>
+            <if test="article.pv != null">
+                and pv = #{article.pv}
+            </if>
+            <if test="article.uv != null">
+                and uv = #{article.uv}
+            </if>
+            <if test="article.wx != null and article.wx != ''">
+                and wx like concat(#{article.wx}, "%")
+            </if>
+            <if test="article.flag != null">
+                and flag = #{article.flag}
+            </if>
+            <if test="article.createDate != null">
+                and create_date = #{article.createDate}
+            </if>
+            <if test="article.updateDate != null">
+                and update_date = #{article.updateDate}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

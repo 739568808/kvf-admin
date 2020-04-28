@@ -18,5 +18,4 @@ public interface UvService extends IService<Uv> {
      * @return page
      */
     Page<Uv> listUvPage(Uv uv);
-
 }

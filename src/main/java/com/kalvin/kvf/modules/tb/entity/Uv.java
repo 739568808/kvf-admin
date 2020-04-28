@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
- * @since 2020-04-27 16:06:12
+ * @since 2020-04-28 13:20:27
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -25,26 +25,28 @@ public class Uv extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 
+     *
      */
     private Integer userId;
     private Long phone;
     private String realName;
     private String title;
+    private String startDate;
+    private String endDate;
 
     /**
-     * 
+     *
      */
     private Integer articleId;
 
     /**
-     * 
+     *
      */
     private String ip;
 
@@ -54,9 +56,15 @@ public class Uv extends BaseEntity {
     private Integer status;
 
     /**
-     * 
+     *
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
+
+    /**
+     *
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updaeDate;
 
 }

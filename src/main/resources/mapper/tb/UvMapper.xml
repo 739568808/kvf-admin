@@ -24,20 +24,23 @@
           from tb_uv uv left join tb_user u on uv.user_id = u.id
           left join tb_article a on uv.article_id = a.id
         <trim prefix="where" prefixOverrides="and">
-            <if test="uv.userId != null">
-                and user_id = #{uv.userId}
+            <if test="uv.phone != null">
+                and u.phone LIKE concat("%", #{uv.phone}, "%")
             </if>
-            <if test="uv.articleId != null">
-                and article_id = #{uv.articleId}
+            <if test="uv.realName != null and uv.realName != ''">
+                and u.real_name LIKE concat("%", #{uv.realName}, "%")
             </if>
-            <if test="uv.ip != null and uv.ip != ''">
-                and ip like concat(#{uv.ip}, "%")
+            <if test="uv.title != null and uv.title != ''">
+                and a.title LIKE concat("%", #{uv.title}, "%")
             </if>
             <if test="uv.status != null">
-                and status = #{uv.status}
+                and uv.status = #{uv.status}
             </if>
-            <if test="uv.createDate != null">
-                and create_date = #{uv.createDate}
+            <if test="uv.startDate != null and uv.startDate != ''">
+                <![CDATA[ and uv.create_date >=  str_to_date( #{uv.startDate},'%Y-%m-%d') ]]>
+            </if>
+            <if test="uv.endDate != null and uv.endDate != ''">
+                <![CDATA[ and uv.create_date  <  str_to_date( #{uv.endDate},'%Y-%m-%d') ]]>
             </if>
         </trim>
     </select>

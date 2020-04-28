@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title th:replace="common/base::pagetitle"></title>
     <link th:replace="common/base::static"/>
+    <style>
+        .taga{color: #00a0e9;}
+    </style>
 </head>
 <body style="background-color: #f2f2f2;">
 
@@ -69,7 +72,13 @@
                 ,{field: 'phone', title: '手机号', width: 130}
                 ,{field: 'password', title: '密码',width: 130}
                 ,{field: 'realName', title: '姓名', width: 130}
-                ,{field: 'uv', title: '有效推广次数', width: 130}
+                ,{field: 'uv', title: '有效推广次数', width: 130,event:'',templet:function (value) {
+                            if (value.uv>0){
+                                return "<a href='javascript:;' class='taga' lay-event='uvEvemt'>"+value.uv+"</a>";
+                            }else{
+                                return value.uv;
+                            }
+                        }}
                 ,{field: 'pid', title: '上级ID', width: 130}
                 ,{field: 'flag', title: '状态', width: 130, templet: '#flagTpl'}
                 ,{field: 'createDate', title: '加入时间', width: 180}
@@ -132,10 +141,12 @@
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
 
-            if (layEvent === 'edit') {
+
+            if(layEvent==='edit'){
+                //有效推广增减操作
                 layer.open({
                     type: 2
-                    ,title: '编辑'
+                    ,title: '减掉/增加有效推广'
                     ,content: BASE_WEB + 'tb/user/edit?id=' + data.id
                     ,maxmin: true
                     ,area: area   // 宽高
@@ -147,6 +158,27 @@
                     }
                 });
             }
+
+            if(layEvent==='uvEvemt'){
+                layer.confirm('确定结算'+data.realName+'--'+data.phone+'的推广次数？', function(index) {
+                    //执行 Ajax 后重载
+                    $.ajax({
+                        type: req.type.post,
+                        url: BASE_WEB + 'tb/uv/jiesuan',
+                        data:{userId:data.user_id},
+                        async: false,
+                        success: function (r) {
+                            if (r.code === req.status.ok) {
+                                table.reload(tableId);
+                                kvfKit.sucessMsg('结算成功');
+                            } else {
+                                kvfKit.errorMsg(r.msg);
+                            }
+                        }
+                    });
+                });
+            }
+
             if (layEvent === 'del') {
                 layer.confirm('确定删除吗？', function(index) {
                     //执行 Ajax 后重载

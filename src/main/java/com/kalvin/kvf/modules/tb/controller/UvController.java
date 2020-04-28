@@ -1,5 +1,6 @@
 package com.kalvin.kvf.modules.tb.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.kalvin.kvf.common.dto.R;
 import com.kalvin.kvf.modules.tb.entity.Uv;
 import com.kalvin.kvf.modules.tb.service.UvService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -69,6 +71,19 @@ public class UvController extends BaseController {
     @PostMapping(value = "edit")
     public R edit(Uv uv) {
         uvService.updateById(uv);
+        return R.ok();
+    }
+
+
+    @RequiresPermissions("tb:uv:edit")
+    @PostMapping(value = "jiesuan")
+    public R jiesuan(Uv uv) {
+        LambdaQueryWrapper<Uv> queryWrapper = new LambdaQueryWrapper<>();
+        Uv en = new Uv();
+        en.setStatus(1);
+        en.setUpdaeDate(LocalDateTime.now());
+        queryWrapper.setEntity(uv);
+        uvService.update(en,queryWrapper);
         return R.ok();
     }
 

@@ -10,6 +10,8 @@ import com.kalvin.kvf.common.dto.R;
 import com.kalvin.kvf.modules.tb.entity.Article;
 import com.kalvin.kvf.modules.tb.service.ArticleService;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -54,6 +56,11 @@ public class ArticleController extends BaseController {
     @RequiresPermissions("tb:article:add")
     @PostMapping(value = "add")
     public R add(Article article) {
+        if (null == article.getPv()){
+            article.setPv(0);
+        }
+        article.setCreateDate(LocalDateTime.now());
+        article.setUpdateDate(LocalDateTime.now());
         articleService.save(article);
         return R.ok();
     }
@@ -68,6 +75,7 @@ public class ArticleController extends BaseController {
     @RequiresPermissions("tb:article:edit")
     @PostMapping(value = "edit")
     public R edit(Article article) {
+        article.setUpdateDate(LocalDateTime.now());
         articleService.updateById(article);
         return R.ok();
     }

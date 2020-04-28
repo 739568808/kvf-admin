@@ -34,6 +34,9 @@ public class Uv extends BaseEntity {
      * 
      */
     private Integer userId;
+    private Long phone;
+    private String realName;
+    private String title;
 
     /**
      * 

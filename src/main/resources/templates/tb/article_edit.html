@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title th:replace="common/base::pagetitle"></title>
     <link th:replace="common/base::static"/>
+    <style>
+        .layui-input-inline{
+            width: 1024px!important;
+        }
+
+    </style>
 </head>
 <body>
 <div class="layui-form" style="padding: 20px 30px 0 0;">
@@ -21,16 +27,23 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">微信号多个用|分隔</label>
+        <label class="layui-form-label">微信号</label>
         <div class="layui-input-inline">
             <input type="text" name="wx" th:value="${editInfo.wx}" lay-verify="required" placeholder="请输入微信号多个用|分隔" autocomplete="off" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">文章浏览量</label>
+        <div class="layui-input-inline">
+            <input type="text" name="pv" th:value="${editInfo.pv}" lay-verify="required" placeholder="浏览量" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label">内容</label>
         <div class="layui-input-inline">
-            <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+            <script id="editor" th:utext="${editInfo.content}" type="text/plain" style="width:1024px;height:500px;"></script>
         </div>
     </div>
 
@@ -59,6 +72,7 @@
         //监听提交
         form.on('submit(kFormSubmit)', function(data){
             var field = data.field; //获取提交的字段
+            field.content = getContent();
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 
             var url = field.id ? 'tb/article/edit' : 'tb/article/add';
@@ -201,7 +215,6 @@
             arr.push(UE.getEditor('editor').getContent());
             return arr.join("\n");
         }
-        UE.getEditor('editor').setContent([[${editInfo.content}]]);
     })
 </script>
 </body>

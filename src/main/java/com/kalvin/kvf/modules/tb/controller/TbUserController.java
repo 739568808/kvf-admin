@@ -10,6 +10,7 @@ import com.kalvin.kvf.common.dto.R;
 import com.kalvin.kvf.modules.tb.entity.TbUser;
 import com.kalvin.kvf.modules.tb.service.TbUserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -54,6 +55,9 @@ public class TbUserController extends BaseController {
     @RequiresPermissions("tb:user:add")
     @PostMapping(value = "add")
     public R add(TbUser user) {
+        user.setCreateDate(LocalDateTime.now());
+        user.setUpdateDate(LocalDateTime.now());
+
         userService.save(user);
         return R.ok();
     }
@@ -68,6 +72,8 @@ public class TbUserController extends BaseController {
     @RequiresPermissions("tb:user:edit")
     @PostMapping(value = "edit")
     public R edit(TbUser user) {
+
+        user.setUpdateDate(LocalDateTime.now());
         userService.updateById(user);
         return R.ok();
     }

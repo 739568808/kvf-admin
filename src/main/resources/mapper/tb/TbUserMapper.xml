@@ -22,36 +22,39 @@
     </sql>
 
     <select id="selectUserList" resultType="com.kalvin.kvf.modules.tb.entity.TbUser">
-        select <include refid="Base_Column_List" /> from tb_user
+        select
+        u.id,u.phone,u.password,u.real_name as realName,u.zfb,u.pid,u.flag,u.create_date as createDate,COUNT(uv.id) AS uv
+        from tb_user u left join tb_uv uv on u.id = uv.user_id and uv.`status`=0
         <trim prefix="where" prefixOverrides="and">
             <if test="user.phone != null">
-                and phone = #{user.phone}
+                and u.phone = #{user.phone}
             </if>
             <if test="user.password != null and user.password != ''">
-                and password like concat(#{user.password}, "%")
+                and u.password like concat(#{user.password}, "%")
             </if>
             <if test="user.realName != null and user.realName != ''">
-                and real_name like concat(#{user.realName}, "%")
+                and u.real_name like concat(#{user.realName}, "%")
             </if>
             <if test="user.zfb != null and user.zfb != ''">
-                and zfb like concat(#{user.zfb}, "%")
+                and u.zfb like concat(#{user.zfb}, "%")
             </if>
             <if test="user.uv != null">
-                and uv = #{user.uv}
+                and u.uv = #{user.uv}
             </if>
             <if test="user.pid != null">
-                and pid = #{user.pid}
+                and u.pid = #{user.pid}
             </if>
             <if test="user.flag != null">
-                and flag = #{user.flag}
+                and u.flag = #{user.flag}
             </if>
             <if test="user.createDate != null">
-                and create_date = #{user.createDate}
+                and u.create_date = #{user.createDate}
             </if>
             <if test="user.updateDate != null">
-                and update_date = #{user.updateDate}
+                and u.update_date = #{user.updateDate}
             </if>
         </trim>
+        group by uv.user_id
     </select>
 
 </mapper>

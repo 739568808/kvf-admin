@@ -18,7 +18,11 @@
     </sql>
 
     <select id="selectUvList" resultType="com.kalvin.kvf.modules.tb.entity.Uv">
-        select <include refid="Base_Column_List" /> from tb_uv
+        select
+        uv.id,uv.user_id as userId,uv.article_id as articleId,uv.ip,uv.`status`,uv.create_date as createDate,
+            u.real_name as realName,u.phone,a.title
+          from tb_uv uv left join tb_user u on uv.user_id = u.id
+          left join tb_article a on uv.article_id = a.id
         <trim prefix="where" prefixOverrides="and">
             <if test="uv.userId != null">
                 and user_id = #{uv.userId}

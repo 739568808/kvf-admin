@@ -48,7 +48,7 @@
 <!--表格列格式化模板 start-->
 <script type="text/html" id="flagTpl">
 <!--todo由于注释不统一规范，无法为你生成格式化代码，请自行处理-->
-<span>{{d.flag}}</span>
+<span>{{d.flag==0?'禁用':'启用'}}</span>
 </script>
 <!--表格列格式化模板 end-->
 
@@ -65,15 +65,14 @@
             ,toolbar: '#headToolbarTpl'
             ,cols: [[ //表头
                 {type:'checkbox', fixed: 'left'}
-                ,{field: 'phone', title: '', width: 130}
-                ,{field: 'password', title: ''}
-                ,{field: 'realName', title: '', width: 130}
-                ,{field: 'zfb', title: '', width: 130}
-                ,{field: 'uv', title: '', width: 130}
-                ,{field: 'pid', title: '', width: 130}
-                ,{field: 'flag', title: '', width: 130, templet: '#flagTpl'}
-                ,{field: 'createDate', title: '', width: 130}
-                ,{field: 'updateDate', title: '', width: 130}
+                ,{field: 'id', title: 'ID', width: 80}
+                ,{field: 'phone', title: '手机号', width: 130}
+                ,{field: 'password', title: '密码',width: 130}
+                ,{field: 'realName', title: '姓名', width: 130}
+                ,{field: 'uv', title: '有效推广次数', width: 130}
+                ,{field: 'pid', title: '上级ID', width: 130}
+                ,{field: 'flag', title: '状态', width: 130, templet: '#flagTpl'}
+                ,{field: 'createDate', title: '加入时间', width: 180}
                 ,{field: '', title: '操作', width: 235, fixed: 'right', templet: '#rowToolbarTpl'}
             ]]
         }));

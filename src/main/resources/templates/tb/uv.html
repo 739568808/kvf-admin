@@ -34,20 +34,20 @@
 
 <!--头部工具栏模板-->
 <script type="text/html" id="headToolbarTpl">
-    <button class="layui-btn layui-btn-sm " lay-event="add">添加</button>
+    <!--<button class="layui-btn layui-btn-sm " lay-event="add">添加</button>-->
     <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="batchdel">批量删除</button>
 </script>
 
 <!--表格行工具栏模板-->
 <script type="text/html" id="rowToolbarTpl">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+<!--    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>-->
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
 </script>
 
 <!--表格列格式化模板 start-->
 <script type="text/html" id="statusTpl">
 <!--todo由于注释不统一规范，无法为你生成格式化代码，请自行处理-->
-<span>{{d.status}}</span>
+<span>{{d.status==0?'未结算':'已结算'}}</span>
 </script>
 <!--表格列格式化模板 end-->
 
@@ -64,11 +64,12 @@
             ,toolbar: '#headToolbarTpl'
             ,cols: [[ //表头
                 {type:'checkbox', fixed: 'left'}
-                ,{field: 'userId', title: '', width: 130}
-                ,{field: 'articleId', title: ''}
-                ,{field: 'ip', title: '', width: 130}
-                ,{field: 'status', title: '0 未结算  1已结算', width: 130, templet: '#statusTpl'}
-                ,{field: 'createDate', title: '', width: 130}
+                ,{field: 'phone', title: '手机号', width: 130}
+                ,{field: 'realName', title: '姓名', width: 130}
+                ,{field: 'title', title: '文章标题', width: 300}
+                ,{field: 'ip', title: '用户IP', width: 130}
+                ,{field: 'status', title: '结算状态', width: 130, templet: '#statusTpl'}
+                ,{field: 'createDate', title: '日期', width: 180}
                 ,{field: '', title: '操作', width: 235, fixed: 'right', templet: '#rowToolbarTpl'}
             ]]
         }));

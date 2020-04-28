@@ -59,7 +59,7 @@
     layui.use(['element', 'form', 'layer', 'table', 'laydate'], function () {
         var elemet = layui.element, form = layui.form, layer = layui.layer, table = layui.table, laydate = layui.laydate;
         var tableId = 'kContentTable';
-        var area = ['449px', '95%'];
+        var area = ['550px', '65%'];
 
         // 实例化table
         var tableIns = table.render($.extend(config.layui.table, {
@@ -72,6 +72,7 @@
                 ,{field: 'phone', title: '手机号', width: 130}
                 ,{field: 'password', title: '密码',width: 130}
                 ,{field: 'realName', title: '姓名', width: 130}
+                ,{field: 'zfb', title: '微信号', width: 130}
                 ,{field: 'uv', title: '有效推广次数', width: 130,event:'',templet:function (value) {
                             if (value.uv>0){
                                 return "<a href='javascript:;' class='taga' lay-event='uvEvemt'>"+value.uv+"</a>";
@@ -80,6 +81,7 @@
                             }
                         }}
                 ,{field: 'pid', title: '上级ID', width: 130}
+
                 ,{field: 'flag', title: '状态', width: 130, templet: '#flagTpl'}
                 ,{field: 'createDate', title: '加入时间', width: 180}
                 ,{field: '', title: '操作', width: 235, fixed: 'right', templet: '#rowToolbarTpl'}

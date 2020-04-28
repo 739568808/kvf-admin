@@ -54,7 +54,7 @@
                 and u.update_date = #{user.updateDate}
             </if>
         </trim>
-        group by uv.user_id
+        group by u.id
     </select>
 
 </mapper>

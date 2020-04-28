@@ -164,8 +164,8 @@
                     //执行 Ajax 后重载
                     $.ajax({
                         type: req.type.post,
-                        url: BASE_WEB + 'tb/uv/jiesuan',
-                        data:{userId:data.user_id},
+                        url: BASE_WEB + 'tb/uv/jiesuan/'+data.id,
+
                         async: false,
                         success: function (r) {
                             if (r.code === req.status.ok) {

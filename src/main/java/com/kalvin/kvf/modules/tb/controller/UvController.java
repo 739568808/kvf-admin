@@ -76,12 +76,20 @@ public class UvController extends BaseController {
 
 
     @RequiresPermissions("tb:uv:edit")
-    @PostMapping(value = "jiesuan")
-    public R jiesuan(Uv uv) {
+    @PostMapping(value = "jiesuan/{userId}")
+    public R jiesuan(@PathVariable Integer userId) {
+        if (userId==null){
+            return R.fail("请求参数为空");
+        }
         LambdaQueryWrapper<Uv> queryWrapper = new LambdaQueryWrapper<>();
         Uv en = new Uv();
         en.setStatus(1);
         en.setUpdaeDate(LocalDateTime.now());
+
+
+
+        Uv uv = new Uv();
+        uv.setUserId(userId);
         queryWrapper.setEntity(uv);
         uvService.update(en,queryWrapper);
         return R.ok();

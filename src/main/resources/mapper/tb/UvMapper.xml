@@ -10,14 +10,15 @@
         <result column="ip" property="ip" />
         <result column="status" property="status" />
         <result column="create_date" property="createDate" />
+        <result column="updae_date" property="updaeDate" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-       id, user_id, article_id, ip, status, create_date
+       id, user_id, article_id, ip, status, create_date, updae_date
     </sql>
 
-    <select id="selectUvList" resultType="com.kalvin.kvf.modules.tb.entity.Uv">
+<select id="selectUvList" resultType="com.kalvin.kvf.modules.tb.entity.Uv">
         select
         uv.id,uv.user_id as userId,uv.article_id as articleId,uv.ip,uv.`status`,uv.create_date as createDate,
             u.real_name as realName,u.phone,a.title

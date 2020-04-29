@@ -62,10 +62,17 @@ public class UeditorController {
         PrintWriter out = response.getWriter();
         request.setCharacterEncoding( "utf-8" );
         response.setHeader("Content-Type" , "text/html");
-//        String rootPath0 = request.getSession().getServletContext().getRealPath( "/" );
+        String rootPath0 = request.getSession().getServletContext().getRealPath( "/" );
+        log.debug("request.getSession().getServletContext().getRealPath(/) : "+rootPath0);
+
 //        log.debug("jar realPath={}", rootPath0);
         String rootPath = ClassUtil.getClassPath();
-        log.debug("ueditor path={}", rootPath);
+        log.debug("ClassUtil.getClassPath() : "+rootPath);
+        String rootPath2 = request.getRealPath( "/" );
+        log.debug("request.getRealPath( / ) : "+rootPath2);
+
+        //log.debug("ueditor path={}", rootPath);
+
         out.write(new ActionEnter(request, rootPath).exec());
     }
 }

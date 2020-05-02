@@ -14,7 +14,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://47.57.146.20:3308/wenzhang?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+      url: jdbc:mysql://47.57.146.205:3308/wenzhang?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
       username: root
       password: 9ol./;p0
       filters: stat,wall,config
@@ -69,8 +69,8 @@ spring:
     # Redis数据库索引
     database: 0
     # Redis服务器地址
-    host: 127.0.0.1
-    port: 6379
+    host: 47.57.146.205
+    port: 6388
     password:
     jedis:
       pool:

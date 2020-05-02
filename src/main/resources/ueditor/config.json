@@ -8,7 +8,7 @@
     "imageCompressBorder": 1600,
     "imageInsertAlign": "none",
     "imageUrlPrefix": "http://47.57.146.205:8003/images/",
-    "imagePathFormat": "/usr/local/nginx/html/images/article/{yyyy}{mm}{dd}/{time}{rand:6}_{filename}",
+    "imagePathFormat": "/usr/local/nginx/html/images/{time}{rand:6}_{filename}",
 
     "scrawlActionName": "uploadscrawl",
     "scrawlFieldName": "upfile",

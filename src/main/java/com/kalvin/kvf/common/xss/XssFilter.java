@@ -13,19 +13,40 @@ import java.io.IOException;
 @Slf4j
 public class XssFilter implements Filter {
 
+    private String[] excludedUrls;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         log.info("init XssFilter...");
+        excludedUrls = filterConfig.getInitParameter("notice").split(",");
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         XssHttpRequestWrapper xssRequest = new XssHttpRequestWrapper((HttpServletRequest) request);
-        chain.doFilter(xssRequest, response);
+        String url = xssRequest.getServletPath();
+        if (isExcludedUrl(url)){
+            chain.doFilter(request, response);
+        }else {
+            chain.doFilter(xssRequest, response);
+        }
     }
 
     @Override
     public void destroy() {
+    }
+
+    private boolean isExcludedUrl(String url){
+        if (excludedUrls==null || excludedUrls.length==0){
+            return false;
+        }
+        for (String ex:excludedUrls){
+            url = url.trim();
+            ex = ex.trim();
+            if (url.toLowerCase().matches(ex.toLowerCase().replace("*",".*"))){
+                return true;
+            }
+        }
+        return false;
     }
 }

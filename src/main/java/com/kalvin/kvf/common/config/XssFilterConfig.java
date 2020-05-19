@@ -28,8 +28,9 @@ public class XssFilterConfig {
         Map<String, String> initParameters = new HashMap<>();
         // excludes用于配置不需要参数过滤的请求url
         initParameters.put("excludes", "/favicon.ico,/img/*,/js/*,/css/*");
+        initParameters.put("notice","*/tb/article/*");
         // isIncludeRichText主要用于设置富文本内容是否需要过滤
-        initParameters.put("isIncludeRichText", "true");
+        initParameters.put("isIncludeRichText", "false");
         filterRegistrationBean.setInitParameters(initParameters);
         return filterRegistrationBean;
     }

@@ -2,9 +2,9 @@ package com.kalvin.kvf.modules.tb.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 import com.kalvin.kvf.modules.tb.entity.TbUser;
 import com.kalvin.kvf.modules.tb.mapper.TbUserMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class TbUserServiceImpl extends ServiceImpl<TbUserMapper, TbUser> impleme
 
     @Override
     public Page<TbUser> listUserPage(TbUser user) {
-        Page<TbUser> page = new Page<>(user.getCurrent(), user.getSize());
+        Page<TbUser> page = new Page<>(user.getCurrent(), user.getSize(),true);
         List<TbUser> users = baseMapper.selectUserList(user, page);
         return page.setRecords(users);
     }
